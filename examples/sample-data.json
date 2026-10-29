@@ -1,0 +1,179 @@
+{
+  "company_name": "Harbor & Pine Insurance Group",
+  "source_url": "https://harborpine.example",
+  "report_date": "October 29, 2026",
+  "frame": "prospect",
+  "key_takeaways": [
+    "Opened a second office in Dublin, OH in Aug 2026 [3]: new territory to fill, so lead volume is a near-term need.",
+    "Posted two producer openings in Sep 2026 [5]: they are adding capacity to work more leads, not fewer.",
+    "4.8 stars across 212 Google reviews [4], with reviewers repeatedly naming fast quote turnaround: speed-to-contact is part of their brand.",
+    "Ohio homeowners carriers filed average increases of about 9% for 2026 [6]: expect more rate shoppers and plan home bind rates accordingly."
+  ],
+  "executive_summary": "Harbor & Pine is an independent agency in Columbus, OH selling personal auto and home plus small commercial lines through 14 carrier appointments [1]. It runs two offices and lists 11 staff, including 6 licensed producers [1, 3]. The owners have grown it steadily since 2011 and are now expanding into Dublin [3]. It competes with captive agents and online carriers on service and carrier choice rather than price [1, 4].",
+  "profile": {
+    "name": "Harbor & Pine Insurance Group LLC [2]",
+    "industry": "Independent insurance agency: personal and small commercial lines [1]",
+    "headquarters": "Columbus, OH [1]",
+    "founded": "2011 [2]",
+    "ceo": "Dana Whitfield, Owner & Principal Agent [1]",
+    "size": "11 staff listed on the team page, 6 licensed producers, Oct 2026 [1]",
+    "website": "harborpine.example",
+    "funding": "Privately held by its two founding partners [2]",
+    "extra": [
+      {
+        "label": "Carrier appointments",
+        "value": "14 listed, including Progressive, Travelers, and Grange [1]"
+      },
+      {
+        "label": "Locations",
+        "value": "Columbus (HQ) and Dublin, opened Aug 2026 [3]"
+      },
+      {
+        "label": "Reputation",
+        "value": "4.8 stars, 212 Google reviews, Oct 2026 [4]"
+      }
+    ]
+  },
+  "key_people": [
+    {
+      "name": "Dana Whitfield",
+      "title": "Owner & Principal Agent",
+      "notes": "Decision-maker on marketing spend; quoted in the Dublin opening coverage [1, 3]"
+    },
+    {
+      "name": "Marcus Lee",
+      "title": "Partner, Commercial Lines",
+      "notes": "Co-founder; leads the commercial book [1, 2]"
+    },
+    {
+      "name": "Priya Shah",
+      "title": "Office Manager",
+      "notes": "Listed as the contact for new-client intake; likely owns lead routing [1]"
+    }
+  ],
+  "signals": [
+    {
+      "date": "Sep 2026",
+      "signal": "Two licensed producer openings posted [5]",
+      "implication": "Adding capacity ahead of growth; leads won't go unworked."
+    },
+    {
+      "date": "Aug 2026",
+      "signal": "Second office opened in Dublin, OH [3]",
+      "implication": "A new territory with no book yet needs a lead source."
+    }
+  ],
+  "products": {
+    "offerings": [
+      {
+        "name": "Personal lines",
+        "description": "Auto, home, renters, umbrella, and recreational vehicles [1]"
+      },
+      {
+        "name": "Small commercial",
+        "description": "BOP, general liability, and commercial auto for contractors and retail [1]"
+      }
+    ],
+    "differentiators": [
+      "Claims same-day quotes on personal lines [1]",
+      "14 carrier appointments give more price options than a captive agent [1]"
+    ]
+  },
+  "target_market": {
+    "segments": "Homeowners and families in the Columbus metro, plus contractors and small retailers for commercial lines [1]",
+    "verticals": [
+      "Personal auto",
+      "Homeowners",
+      "Contractors",
+      "Retail"
+    ]
+  },
+  "competitors": [
+    {
+      "name": "Local captive agents (State Farm, Allstate)",
+      "strengths": "Brand recognition and national ad budgets",
+      "differentiation": "Harbor & Pine can shop 14 carriers when a captive's rate rises [1, 6]"
+    },
+    {
+      "name": "Online direct carriers",
+      "strengths": "Fast self-serve quotes and low prices for simple risks",
+      "differentiation": "Reviews credit personal service and help with claims [4]"
+    }
+  ],
+  "industry": {
+    "trends": [
+      "Ohio homeowners carriers filed average increases of about 9% for 2026, pushing more households to shop [6]"
+    ],
+    "challenges": [
+      "Higher home premiums lower bind rates on home quotes even when lead quality holds [6]"
+    ]
+  },
+  "developments": [
+    {
+      "date": "Aug 2026",
+      "title": "Dublin office opens",
+      "description": "Second location staffed by two producers; the owner cited demand from northwest Columbus suburbs [3]"
+    }
+  ],
+  "lead_gen": {
+    "outreach_angles": [
+      {
+        "title": "Fill the new territory",
+        "description": "The Dublin office opened in August [3] and needs a book. Lead with exclusive, ZIP-targeted volume for Dublin and the northwest suburbs."
+      },
+      {
+        "title": "Speed matches their brand",
+        "description": "Reviewers praise fast quotes [4]. Real-time lead delivery fits how they already sell."
+      }
+    ]
+  },
+  "info_gaps": [
+    "Annual premium volume or revenue: private, not disclosed",
+    "Current lead vendors and monthly marketing spend: not public; ask on the first call",
+    "CRM or agency management system: not mentioned on the site or in job posts"
+  ],
+  "sources": [
+    {
+      "id": 1,
+      "title": "About Us and Our Team",
+      "publisher": "Harbor & Pine website",
+      "date": "Accessed Oct 29, 2026",
+      "url": "https://harborpine.example/about"
+    },
+    {
+      "id": 2,
+      "title": "Business entity record",
+      "publisher": "Ohio Secretary of State",
+      "date": "Accessed Oct 29, 2026",
+      "url": "https://sos.example/harborpine"
+    },
+    {
+      "id": 3,
+      "title": "Harbor & Pine opens Dublin office",
+      "publisher": "Dublin Local News",
+      "date": "Aug 14, 2026",
+      "url": "https://dublinnews.example/harbor-pine"
+    },
+    {
+      "id": 4,
+      "title": "Google Business Profile reviews",
+      "publisher": "Google",
+      "date": "Accessed Oct 29, 2026",
+      "url": "https://maps.example/harborpine"
+    },
+    {
+      "id": 5,
+      "title": "Licensed Insurance Producer job posting",
+      "publisher": "Indeed",
+      "date": "Sep 22, 2026",
+      "url": "https://jobs.example/harborpine-producer"
+    },
+    {
+      "id": 6,
+      "title": "2026 homeowners rate filings summary",
+      "publisher": "Ohio Department of Insurance",
+      "date": "Jul 2026",
+      "url": "https://insurance.example/2026-filings"
+    }
+  ]
+}
