@@ -38,7 +38,7 @@ are skipped.
 ## Repository layout
 
 ```
-skill.md                      Skill instructions and frontmatter
+SKILL.md                      Skill instructions and frontmatter
 references/data-schema.md     JSON schema, frame headings, citation format, worked example
 scripts/generate_report.py    Validates the research JSON and renders the PDF
 examples/sample-data.json     Worked example input (fictional company)
