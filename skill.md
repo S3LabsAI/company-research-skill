@@ -1,6 +1,6 @@
 ---
 name: research-company
-description: Research a company from its name or URL and produce a cited Account Research Report as a styled PDF. Use when asked to research a company or agency, build an account profile or account plan, or turn research into a sell-ready client summary.
+description: Research a company from its name or URL and produce a cited Account Research Report as a styled PDF. Use when asked to research a company or agency, build an account profile or account research report, prep for a prospect or client call, or size up a business from its website. Handles venture-backed tech, mid-market firms, and local businesses such as insurance agencies.
 ---
 
 # Company Research

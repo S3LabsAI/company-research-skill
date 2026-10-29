@@ -1,99 +1,103 @@
-# company-research-skill
+# Company Research Skill
 
-A packaged Claude Agent Skill that researches a company from its name or URL and
-generates a cited, styled PDF "Account Research Report." It handles venture-backed
-tech, mid-market firms, and local businesses such as insurance agencies.
+A Claude skill that researches a company from its name or URL and produces a
+cited, styled **Account Research Report** as a PDF. Built for salespeople and
+account managers who need a page-one brief before a call and a sourced reference
+afterward. It handles venture-backed tech, mid-market firms, and local businesses
+such as insurance agencies.
 
-The repository contains a single distributable artifact, `research-company.skill`,
-which is a ZIP archive bundling the skill definition, a data schema reference, and
-a PDF-generation script.
+See a sample report: [`examples/sample-report.pdf`](examples/sample-report.pdf)
+(a fictional agency, rendered from [`examples/sample-data.json`](examples/sample-data.json)).
 
-## Contents
+## What it does
 
-The `research-company.skill` archive contains:
+- **Classifies the company first** (tech, mid-market or enterprise, local business)
+  and researches where that type's facts actually live, including carrier agent
+  pages, reviews, and license lookups for insurance agencies.
+- **Cites every claim.** Inline `[n]` markers render as superscript links to a
+  numbered Sources section.
+- **Applies evidence rules:** attributes company claims, dates facts that change,
+  labels estimates, and records conflicts and missing facts as Information Gaps.
+- **Leads with what matters:** a Key Takeaways box on page one pairs each cited
+  fact with why it matters to the reader.
+- **Supports two frames:** `prospect` (an account to win) and `client` (an
+  existing account). The frame relabels the signals, use-case, angle, and partner
+  sections.
+- **Validates before rendering:** flags missing required fields, citation numbers
+  with no matching source, uncited sources, uncited takeaways and outreach angles,
+  placeholder text, and em dashes.
 
-- `research-company/SKILL.md`: the skill manifest and workflow instructions.
-- `research-company/references/data-schema.md`: the JSON schema the PDF generator
-  reads, frame headings, citation format, and a worked example.
-- `research-company/scripts/generate_report.py`: validates a JSON research file and
-  renders it into a styled PDF using [reportlab](https://pypi.org/project/reportlab/).
+## Report sections
 
-## Features
+Key takeaways, executive summary, company profile, key people, buying or account
+signals, products and services, target market, use cases, competitive landscape,
+industry and market, recent developments, outreach angles, partnership targets,
+prospecting keywords, information gaps, and sources. Sections with no content
+are skipped.
 
-- **Research workflow** that classifies the company type first (tech, mid-market,
-  or local business) and looks where that type's facts live, including carrier
-  agent pages, reviews, and license lookups for insurance agencies.
-- **Citations throughout.** Claims carry inline `[n]` markers that render as
-  superscript links to a numbered Sources section at the end of the report.
-- **Evidence rules:** attribute company claims, date facts that change, label
-  estimates, and record conflicts and missing facts in Information Gaps.
-- **Page one built for skimming:** a Key Takeaways box, then the executive summary
-  and company profile.
-- **Two frames:** `prospect` (an account to win) and `client` (an existing
-  account). The frame relabels the signals, use-case, angle, and partner sections.
-- **Sections:** key takeaways, executive summary, company profile (with custom
-  rows), key people, buying or account signals, products and services, target
-  market, use cases, competitive landscape, industry and market, recent
-  developments, outreach angles, partnership targets, prospecting keywords,
-  information gaps, and sources. Empty sections are skipped.
-- **Validator** that runs before every render and flags missing required fields,
-  citation numbers with no matching source, uncited sources, uncited takeaways and
-  outreach angles, placeholder text, and em dashes.
-- **Rendering details:** escapes `&` and `<` in names, uses DejaVu Sans when it is
-  installed (falls back to Helvetica), keeps section headings with their content,
-  adds a page footer with page numbers, and sets PDF metadata.
-- **Backward compatible:** JSON written for v1 still renders; the new fields are
-  optional.
+## Repository layout
 
-## Installation
-
-The PDF generator requires Python 3 and reportlab:
-
-```bash
-pip install reportlab
+```
+skill.md                      Skill instructions and frontmatter
+references/data-schema.md     JSON schema, frame headings, citation format, worked example
+scripts/generate_report.py    Validates the research JSON and renders the PDF
+examples/sample-data.json     Worked example input (fictional company)
+examples/sample-report.pdf    PDF rendered from the sample input
+requirements.txt              Python dependency (reportlab)
 ```
 
-`reportlab` is the only third-party import in `generate_report.py`. Upload
-`research-company.skill` to Claude as a skill to use it.
+## Requirements
+
+- Python 3.8 or later
+- [reportlab](https://pypi.org/project/reportlab/)
+
+```bash
+pip install -r requirements.txt
+```
+
+Web search and page-fetch tools are needed for the research step. The PDF
+step only needs Python and reportlab.
 
 ## Usage
 
-Validate a JSON file, then render it:
+Ask Claude to research a company, for example:
+
+- "Research acme.com and give me an account research report."
+- "Build a client account report for Harbor & Pine Insurance, we just signed them."
+
+The skill researches the company, writes the report data as JSON, and renders it:
 
 ```bash
-python3 scripts/generate_report.py input.json "Company Name - Account Research Report.pdf"
+python3 scripts/generate_report.py report_data.json "Company Name - Account Research Report.pdf"
 ```
 
-Validate only, without rendering:
+Validate a JSON file without rendering:
 
 ```bash
-python3 scripts/generate_report.py input.json --check
+python3 scripts/generate_report.py report_data.json --check
 ```
 
-Running it without both arguments prints usage and exits. The input JSON follows
-`references/data-schema.md`. Only `company_name` and `source_url` are required.
+Try it with the bundled example:
 
-## Configuration
-
-There are no environment variables or configuration files. Behavior is controlled
-by the input JSON (including `frame` and `prepared_for`) and the command-line
-arguments.
+```bash
+python3 scripts/generate_report.py examples/sample-data.json sample.pdf
+```
 
 ## Changelog
 
 ### v2 (2026-10-29)
 
-- Added inline citations, a numbered Sources section, Key Takeaways, Key People,
-  and Buying/Account Signals.
-- Added `prospect` and `client` frames and company-type classification, with
-  research guidance for local businesses and insurance agencies.
-- Replaced the fixed four-query research step (one hardcoded to 2024) with
-  topic coverage and current-year queries.
-- Added the JSON validator and `--check` mode.
-- Fixed PDF rendering of names containing `&` or `<`, added Unicode font support,
-  page numbers, and heading orphan control.
-- Rewrote the schema reference with a contents list, frame table, and a cited
-  worked example.
+- Inline citations, a numbered Sources section, Key Takeaways, Key People, and
+  Buying/Account Signals.
+- `prospect` and `client` frames, plus company-type classification with research
+  guidance for local businesses and insurance agencies.
+- Topic-based research coverage with current-year queries, replacing four fixed
+  queries (one hardcoded to 2024).
+- JSON validator and `--check` mode.
+- PDF fixes: escaping for names containing `&` or `<`, Unicode font support,
+  page numbers, and section headings kept with their content.
+- Schema reference rewritten with a contents list, frame table, and a cited
+  worked example. JSON written for v1 still renders.
 
 ### v1
 
@@ -101,4 +105,4 @@ arguments.
 
 ## License
 
-No license file is included in this repository.
+No license has been chosen for this repository yet.
