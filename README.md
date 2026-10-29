@@ -4,9 +4,11 @@ A packaged Claude Agent Skill that researches a company from its name or URL and
 generates a cited, styled PDF "Account Research Report." It handles venture-backed
 tech, mid-market firms, and local businesses such as insurance agencies.
 
-The repository contains a single distributable artifact, `research-company.skill`,
-which is a ZIP archive bundling the skill definition, a data schema reference, and
-a PDF-generation script.
+The repository contains the source docs and the packaged skill artifact. In this
+repository the artifact is currently checked in as `company-research-skill.md`;
+when you distribute it to Claude, either rename it to `research-company.skill` or
+export the zip archive under that name. The repo keeps the original checked-in name
+so the binary artifact remains traceable in Git.
 
 ## Contents
 
@@ -53,8 +55,10 @@ The PDF generator requires Python 3 and reportlab:
 pip install reportlab
 ```
 
-`reportlab` is the only third-party import in `generate_report.py`. Upload
-`research-company.skill` to Claude as a skill to use it.
+`reportlab` is the only third-party import in `generate_report.py`. When the
+packaged artifact is used directly in Claude, name it `research-company.skill`.
+For this repo, the checked-in artifact keeps its Git-traceable file name
+`company-research-skill.md` until it is exported for distribution.
 
 ## Usage
 
