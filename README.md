@@ -1,7 +1,8 @@
 # company-research-skill
 
-A packaged Claude Agent Skill that researches a B2B company from its URL and
-generates a professionally styled PDF "Account Research Report."
+A packaged Claude Agent Skill that researches a company from its name or URL and
+generates a cited, styled PDF "Account Research Report." It handles venture-backed
+tech, mid-market firms, and local businesses such as insurance agencies.
 
 The repository contains a single distributable artifact, `research-company.skill`,
 which is a ZIP archive bundling the skill definition, a data schema reference, and
@@ -11,61 +12,92 @@ a PDF-generation script.
 
 The `research-company.skill` archive contains:
 
-- `research-company/SKILL.md` — the skill manifest and workflow instructions.
-- `references/data-schema.md` — the full JSON schema used as input to the PDF generator.
-- `scripts/generate_report.py` — a Python script that renders a JSON research file
-  into a styled PDF using [reportlab](https://pypi.org/project/reportlab/).
+- `research-company/SKILL.md`: the skill manifest and workflow instructions.
+- `research-company/references/data-schema.md`: the JSON schema the PDF generator
+  reads, frame headings, citation format, and a worked example.
+- `research-company/scripts/generate_report.py`: validates a JSON research file and
+  renders it into a styled PDF using [reportlab](https://pypi.org/project/reportlab/).
 
 ## Features
 
-- Defines a research workflow that gathers company information via web fetches and
-  searches, then structures it as JSON (per `references/data-schema.md`).
-- Generates a multi-section PDF report covering executive summary, company profile,
-  products/offerings, target market, use cases, competitors, industry trends,
-  recent developments, lead-generation notes, and information gaps.
-- Uses a fixed slate-based color palette and reportlab's built-in fonts for
-  consistent typography (no external font files are registered).
+- **Research workflow** that classifies the company type first (tech, mid-market,
+  or local business) and looks where that type's facts live, including carrier
+  agent pages, reviews, and license lookups for insurance agencies.
+- **Citations throughout.** Claims carry inline `[n]` markers that render as
+  superscript links to a numbered Sources section at the end of the report.
+- **Evidence rules:** attribute company claims, date facts that change, label
+  estimates, and record conflicts and missing facts in Information Gaps.
+- **Page one built for skimming:** a Key Takeaways box, then the executive summary
+  and company profile.
+- **Two frames:** `prospect` (an account to win) and `client` (an existing
+  account). The frame relabels the signals, use-case, angle, and partner sections.
+- **Sections:** key takeaways, executive summary, company profile (with custom
+  rows), key people, buying or account signals, products and services, target
+  market, use cases, competitive landscape, industry and market, recent
+  developments, outreach angles, partnership targets, prospecting keywords,
+  information gaps, and sources. Empty sections are skipped.
+- **Validator** that runs before every render and flags missing required fields,
+  citation numbers with no matching source, uncited sources, uncited takeaways and
+  outreach angles, placeholder text, and em dashes.
+- **Rendering details:** escapes `&` and `<` in names, uses DejaVu Sans when it is
+  installed (falls back to Helvetica), keeps section headings with their content,
+  adds a page footer with page numbers, and sets PDF metadata.
+- **Backward compatible:** JSON written for v1 still renders; the new fields are
+  optional.
 
 ## Installation
 
-The PDF generator requires Python 3 and reportlab. Per the instructions in
-`SKILL.md`:
+The PDF generator requires Python 3 and reportlab:
 
 ```bash
 pip install reportlab
 ```
 
-> Note: the repository does not include a dependency manifest
-> (`requirements.txt` / `pyproject.toml`); `reportlab` is the only third-party
-> import in `generate_report.py`.
-
-To use the skill with Claude, the `research-company.skill` archive is uploaded as
-an Agent Skill. (This usage is inferred from the `.skill` package format; it is not
-documented in the repository.)
+`reportlab` is the only third-party import in `generate_report.py`. Upload
+`research-company.skill` to Claude as a skill to use it.
 
 ## Usage
 
-The report generator takes a JSON input file and an output PDF path:
+Validate a JSON file, then render it:
 
 ```bash
-python3 scripts/generate_report.py input.json output.pdf
+python3 scripts/generate_report.py input.json "Company Name - Account Research Report.pdf"
 ```
 
-Running it without both arguments prints usage and exits:
+Validate only, without rendering:
 
-```
-Usage: python generate_report.py input.json output.pdf
+```bash
+python3 scripts/generate_report.py input.json --check
 ```
 
-The input JSON must follow the schema in `references/data-schema.md`. Required
-top-level fields include `company_name` and `source_url`; optional sections include
-`executive_summary`, `profile`, `products`, `target_market`, `use_cases`,
-`competitors`, `industry`, `developments`, `lead_gen`, and `info_gaps`.
+Running it without both arguments prints usage and exits. The input JSON follows
+`references/data-schema.md`. Only `company_name` and `source_url` are required.
 
 ## Configuration
 
 There are no environment variables or configuration files. Behavior is controlled
-entirely by the input JSON and the two command-line arguments.
+by the input JSON (including `frame` and `prepared_for`) and the command-line
+arguments.
+
+## Changelog
+
+### v2 (2026-10-29)
+
+- Added inline citations, a numbered Sources section, Key Takeaways, Key People,
+  and Buying/Account Signals.
+- Added `prospect` and `client` frames and company-type classification, with
+  research guidance for local businesses and insurance agencies.
+- Replaced the fixed four-query research step (one hardcoded to 2024) with
+  topic coverage and current-year queries.
+- Added the JSON validator and `--check` mode.
+- Fixed PDF rendering of names containing `&` or `<`, added Unicode font support,
+  page numbers, and heading orphan control.
+- Rewrote the schema reference with a contents list, frame table, and a cited
+  worked example.
+
+### v1
+
+- Initial release.
 
 ## License
 
